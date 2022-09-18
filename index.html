@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script
+      src="https://unpkg.com/react@18/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+      crossorigin
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="mydiv"></div>
+
+    <script type="text/babel">
+      const allData = Array.from({ length: 40 }, () =>
+        Math.floor(Math.random() * 40)
+      );
+      function App() {
+        const [currentList, setCurrentList] = React.useState(allData);
+        return (
+          <>
+            <div style={{ display: "flex" }}>
+              <button style={{ width: "100px", height: "100px" }}>Sort</button>
+              <button style={{ width: "100px", height: "100px" }}>
+                Filter Odd Numbers
+              </button>
+            </div>
+            {currentList.map((item, index) => (
+              <div key={index}> {item.toString()} </div>
+            ))}
+          </>
+        );
+      }
+
+      const root = ReactDOM.createRoot(document.getElementById("mydiv"));
+      root.render(<App />);
+    </script>
+  </body>
+</html>
