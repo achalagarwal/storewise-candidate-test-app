@@ -1,42 +1,68 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <script
-      src="https://unpkg.com/react@18/umd/react.development.js"
-      crossorigin
-    ></script>
-    <script
-      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
-      crossorigin
-    ></script>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-  </head>
-  <body>
+</head>
+
+<body>
     <div id="mydiv"></div>
 
     <script type="text/babel">
-      const allData = Array.from({ length: 40 }, () =>
-        Math.floor(Math.random() * 40)
-      );
-      function App() {
-        const [currentList, setCurrentList] = React.useState(allData);
-        return (
-          <>
-            <div style={{ display: "flex" }}>
-              <button style={{ width: "100px", height: "100px" }}>Sort</button>
-              <button style={{ width: "100px", height: "100px" }}>
-                Filter Odd Numbers
-              </button>
-            </div>
-            {currentList.map((item, index) => (
-              <div key={index}> {item.toString()} </div>
-            ))}
-          </>
+        const allData = Array.from({ length: 40 }, () =>
+            Math.floor(Math.random() * 40)
         );
-      }
+        function App() {
+            const [currentList, setCurrentList] = React.useState(allData);
 
-      const root = ReactDOM.createRoot(document.getElementById("mydiv"));
-      root.render(<App />);
+            function comparefn(a, b) {
+                return a - b;
+            }
+
+            const handleSort = () => {
+                let arr = currentList;
+                arr.join();
+                arr.sort(comparefn);
+                setCurrentList(arr);
+                //console.log(arr);
+            }
+
+            const handleFilter = () => {
+                let arr = currentList;
+                arr = arr.filter((data) => {
+                    return data % 2;
+                })
+                setCurrentList(arr);
+            }
+
+
+
+            return (
+                <>
+                    <div style={{ display: "flex" }}>
+                        <button style={{ width: "100px", height: "100px" }} id="sortbtn" onClick={handleSort}>Sort</button>
+                        <button style={{ width: "100px", height: "100px" }} id="filtrBtn" onClick={handleFilter}>
+                            Filter Odd Numbers
+                        </button>
+                    </div>
+                    {currentList.map((item, index) => (
+                        <div key={index}> {item} </div>
+                    ))}
+                </>
+            );
+        }
+
+
+
+        const root = ReactDOM.createRoot(document.getElementById("mydiv"));
+        root.render(<App />);
     </script>
-  </body>
+</body>
+
 </html>
