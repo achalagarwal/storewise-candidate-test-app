@@ -18,15 +18,25 @@
       const allData = Array.from({ length: 40 }, () =>
         Math.floor(Math.random() * 40)
       );
+
       function App() {
         const [currentList, setCurrentList] = React.useState(allData);
+
+        const sortNumbers = () => {
+          const sortedList = [...currentList].sort((a, b) => a - b);
+          setCurrentList(sortedList);
+        };
+
+        const filterOddNumbers = () => {
+          const filteredList = allData.filter(num => num % 2 !== 0);
+          setCurrentList(filteredList);
+        };
+
         return (
           <>
             <div style={{ display: "flex" }}>
-              <button style={{ width: "100px", height: "100px" }}>Sort</button>
-              <button style={{ width: "100px", height: "100px" }}>
-                Filter Odd Numbers
-              </button>
+              <button style={{ width: "100px", height: "100px" }} onClick={sortNumbers}>Sort</button>
+              <button style={{ width: "100px", height: "100px" }} onClick={filterOddNumbers}>Filter Odd Numbers</button>
             </div>
             {currentList.map((item, index) => (
               <div key={index}> {item.toString()} </div>
