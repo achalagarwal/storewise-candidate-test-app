@@ -20,11 +20,32 @@
       );
       function App() {
         const [currentList, setCurrentList] = React.useState(allData);
+
+        // Event handler to sort the list
+        const handleSort = () => {
+          const sortedList = [...currentList].sort((a, b) => a - b);
+          setCurrentList(sortedList);
+        };
+
+        // Event handler to filter odd numbers
+        const handleFilterOdd = () => {
+          const oddNumbers = currentList.filter((num) => num % 2 !== 0);
+          setCurrentList(oddNumbers);
+        };
+
         return (
           <>
             <div style={{ display: "flex" }}>
-              <button style={{ width: "100px", height: "100px" }}>Sort</button>
-              <button style={{ width: "100px", height: "100px" }}>
+              <button
+                style={{ width: "100px", height: "100px" }}
+                onClick={handleSort}
+              >
+                Sort
+              </button>
+              <button
+                style={{ width: "100px", height: "100px" }}
+                onClick={handleFilterOdd}
+              >
                 Filter Odd Numbers
               </button>
             </div>
